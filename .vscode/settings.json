@@ -1,9 +1,9 @@
 {
-  "editor.fontSize": 16,
-  "editor.fontFamily": "'JetBrains Mono', Consolas, 'Courier New', monospace",
+  "editor.fontSize": 15,
+  "editor.fontFamily": "'Cascadia Code', ' JetBrains Mono', Consolas, 'Courier New', monospace",
   "editor.fontLigatures": true,
-  "editor.fontWeight": "500",
-  "editor.lineHeight": 24,
+  "editor.fontWeight": "400",
+  "editor.lineHeight": 22,
   "C_Cpp.errorSquiggles": "enabled",
   "C_Cpp.default.compilerPath": "C:/ming/mingw64/bin/g++.exe"
 }
