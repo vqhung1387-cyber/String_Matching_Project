@@ -1,13 +1,17 @@
 #include "utils.h"
+#include "algorithms.h"
 
 using namespace std;
+
+int cnt = 0;
 
 void readInputFile(string filename, vector<vector<char>> &dict, vector<string> &testCase)
 {
     ifstream fin(filename, ios::in);
+
     if (!fin.is_open())
     {
-        cout << "Cannot open " << filename << endl;
+        cout << "Cannot open " << filename << " to get input." << endl;
         return;
     }
     int r, c;
@@ -28,10 +32,26 @@ void readInputFile(string filename, vector<vector<char>> &dict, vector<string> &
         fin >> s;
         testCase.push_back(s);
     }
+    fin.close();
 }
 
-void writeAlgorithmCompTime(string name, int cmp, int time, ofstream &fout)
+void writeAlgorithmCompTime(string name, int cmp, chrono::duration<double> time, string filename)
 {
+    ofstream fout;
+    if (cnt == 0)
+        fout.open(filename, ios::out);
+    else
+        fout.open(filename, ios::out | ios::app);
+
+    if (!fout.is_open())
+    {
+        cout << "Cannot open " << filename << " to write output." << endl;
+    }
+    for (int i = 0; i < 7; i++)
+    {
+        fout << "------";
+    }
+    fout << endl;
     fout << "Algorithm: ";
     if (name == "bf")
         fout << "BF" << endl;
@@ -46,20 +66,38 @@ void writeAlgorithmCompTime(string name, int cmp, int time, ofstream &fout)
         fout << "Cannot find this algorithm." << endl;
         return;
     }
+    fout << "Comparisons: " << cmp << endl;
+    fout << "Execution Time: " << time.count() << endl;
+    fout.close();
 }
 
-void writeOuputFile(string filename, vector<string> &results, int argc, char *argv[])
+void writeOuputRes(string filename, vector<MatchResult> &results, string testName)
 {
-    ofstream fout(filename, ios::out);
+    ofstream fout;
+    if (cnt == 0)
+    {
+        fout.open(filename, ios::out);
+        cnt += 1;
+    }
+    else
+        fout.open(filename, ios::out | ios::app);
+
     if (!fout.is_open())
     {
-        cout << "Cannot open " << filename << endl;
+        cout << "Cannot open " << filename << " to write output." << endl;
         return;
     }
 
-    for (int i = 0; i < 7; i++)
+    fout << testName << ": ";
+    int n = results.size();
+    if (n == 0)
     {
-        fout << "------";
+        fout << "not found" << endl;
+    }
+    for (int i = 0; i < n; i++)
+    {
+        fout << "(" << results[i].start_row << ", " << results[i].start_col << ")" << " -> " << "(" << results[i].end_row << ", " << results[i].end_col << "); ";
     }
     fout << endl;
+    fout.close();
 }
