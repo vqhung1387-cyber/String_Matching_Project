@@ -66,11 +66,11 @@ void writeAlgorithmCompTime(string name, long long cmp, chrono::duration<double>
         fout << "BM" << endl;
     else
     {
-        fout << "Cannot find this algorithm." << endl;
+        cout << "Cannot find this algorithm." << endl;
         return;
     }
     fout << "Comparisons: " << cmp << endl;
-    fout << "Execution Time: " << time.count() << endl;
+    fout << "Execution Time: " << time.count() * 1000 << " ms";
     fout.close();
 }
 
