@@ -7,7 +7,6 @@
 #include <chrono>
 #include "algorithms.h"
 
-
 using namespace std;
 
 void readInputFile(string filename, vector<vector<char>> &dict, vector<string> &testCase);

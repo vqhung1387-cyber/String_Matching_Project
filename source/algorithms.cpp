@@ -284,41 +284,39 @@ long long searchBM_cmp(const vector<char> &text, const string &pattern, bool hor
     int m = pattern.size();
 
     if (m == 0 || m > n)
-        return 2;
-    total_comparison += 2;
+        return 0;
 
     int badChar[26];
-    for (int i = 0; i < 26; i++, ++total_comparison)
+    for (int i = 0; i < 26; i++)
     {
         badChar[i] = m;
     }
 
-    for (int i = 0; i < m - 1; i++, ++total_comparison)
+    for (int i = 0; i < m - 1; i++)
     {
         badChar[(pattern[i] - 'a')] = m - 1 - i;
     }
 
     int s = 0;
-    while (s <= (n - m) && ++total_comparison)
+    while (s <= (n - m))
     {
         int j = m - 1;
 
-        while (j >= 0 && pattern[j] == text[s + j] && ++(++total_comparison))
+        while (j >= 0)
         {
-            j--;
+            total_comparison++;
+            if (pattern[j] == text[s + j])
+            {
+                j--;
+            }
+            else
+            {
+                break;
+            }
         }
 
         if (j < 0)
         {
-            total_comparison++;
-            if (horizontal)
-            {
-                total_comparison++;
-            }
-            else
-            {
-                total_comparison++;
-            }
             s += badChar[(text[s + m - 1] - 'a')];
         }
         else
@@ -334,15 +332,16 @@ long long BMSearch_2D_cmp(const vector<vector<char>> &grid, const string &patter
     long long total_comparison = 0;
     int row = grid.size(), col = grid[0].size();
 
-    for (int i = 0; i < row; i++, ++total_comparison)
+    for (int i = 0; i < row; i++)
     {
         total_comparison += searchBM_cmp(grid[i], pattern, true, i);
     }
 
-    for (int j = 0; j < col; j++, ++total_comparison)
+    for (int j = 0; j < col; j++)
     {
         vector<char> colData(row);
-        for (int i = 0; i < row; i++, ++total_comparison)
+
+        for (int i = 0; i < row; i++)
         {
             colData[i] = grid[i][j];
         }
@@ -350,7 +349,6 @@ long long BMSearch_2D_cmp(const vector<vector<char>> &grid, const string &patter
     }
     return total_comparison;
 }
-
 // --------------------------------------------------
 
 // Kiem tra vi tri dang xet co nam trong matrix khong

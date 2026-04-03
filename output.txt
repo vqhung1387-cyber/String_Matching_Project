@@ -2,6 +2,6 @@ test: (0, 0) -> (0, 3); (0, 0) -> (3, 0);
 bug: not found
 
 ------------------------------------------
-Algorithm: BF
-Comparisons: 42
-Execution Time: 0.0003242
+Algorithm: BM
+Comparisons: 22
+Execution Time: 0.0003115
