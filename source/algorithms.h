@@ -11,6 +11,11 @@ struct MatchResult
     int end_row, end_col;
 };
 
+bool isValid(int, int, int, int);
+vector<MatchResult> BFSearch_2D(const vector<vector<char>>&, const string&);
+long long BFSearch_2D_Comparisons(const vector<vector<char>>&, const string&);
+//-------------------------------------------------
+
 void computeLPSArray(const string &pattern, int M, vector<int> &lps);
 vector<MatchResult> KMPSearch_2D(const vector<vector<char>> &grid, const string &pattern);
 

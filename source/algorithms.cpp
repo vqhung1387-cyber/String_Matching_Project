@@ -324,3 +324,96 @@ long long BMSearch_2D_cmp(const vector<vector<char>>& grid, const string& patter
     }
     return total_comparison;
 }
+
+// --------------------------------------------------
+
+//Kiem tra vi tri dang xet co nam trong matrix khong
+bool isValid(int x, int y, int Rows, int Cols) {
+	return x >= 0 && x < Rows && y >= 0 && y < Cols;
+}
+
+
+vector<MatchResult> BFSearch_2D(const vector<vector<char>>& grid, const string& pattern)
+{
+
+	int dx[8] = { 0, 0, 1, -1, 1, -1, 1, -1 };
+	int dy[8] = { 1, -1, 0, 0, 1, -1, -1, 1 };
+
+	vector<MatchResult> results;
+	int lenPattern = pattern.size();
+
+	if (lenPattern == 0 || grid.empty() || grid[0].empty())
+		return results;
+
+	int Rows = grid.size();
+	int Cols = grid[0].size();
+
+	for (int i = 0; i < Rows; ++i)
+	{
+		for (int j = 0; j < Cols; ++j)
+		{
+			if (grid[i][j] != pattern[0]) continue; //Tim ky tu dau
+
+			for (int d = 0; d < 8; ++d) //Thu 8 huong
+			{
+				int x = i, y = j; // Xuat phat tu ky tu dau duoc tim thay
+				int k;
+				for (k = 1; k < lenPattern; ++k)
+				{
+					x = x + dx[d];
+					y = y + dy[d];
+
+					if (!isValid(x, y, Rows, Cols)) break;
+					if (grid[x][y] != pattern[k]) break;
+				}
+				if (k == lenPattern) results.push_back({ i, j, x, y });
+			}
+
+		}
+	}
+	return results;
+}
+
+long long BFSearch_2D_Comparisons(const vector<vector<char>>& grid, const string& pattern)
+{
+	long long total_comparisons = 0;	
+	int dx[8] = { 0, 0, 1, -1, 1, -1, 1, -1 };
+	int dy[8] = { 1, -1, 0, 0, 1, -1, -1, 1 };
+
+	vector<MatchResult> results;
+	int lenPattern = pattern.size();
+
+	if (lenPattern == 0 || grid.empty() || grid[0].empty())
+		return 0;
+
+	int Rows = grid.size();
+	int Cols = grid[0].size();
+
+	for (int i = 0; i < Rows; ++i)
+	{
+		for (int j = 0; j < Cols; ++j)
+		{
+			++total_comparisons;
+			if (grid[i][j] != pattern[0]) continue; //Tim ky tu dau
+
+			for (int d = 0; d < 8; ++d) //Thu 8 huong
+			{
+				int x = i, y = j; // Xuat phat tu ky tu dau duoc tim thay
+				int k;
+				for (k = 1; k < lenPattern; ++k)
+				{
+					x = x + dx[d];
+					y = y + dy[d];
+
+					if (!isValid(x, y, Rows, Cols)) break;
+
+					++total_comparisons;
+					if (grid[x][y] != pattern[k]) break;
+				}
+				if (k == lenPattern) results.push_back({ i, j, x, y });
+			}
+
+		}
+	}
+	return total_comparisons;
+}

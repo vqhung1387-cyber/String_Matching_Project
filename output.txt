@@ -2,6 +2,6 @@ test: (0, 0) -> (0, 3); (0, 0) -> (3, 0);
 bug: not found
 
 ------------------------------------------
-Algorithm: KMP
-Comparisons: 69
-Execution Time: 0.0003335
+Algorithm: BF
+Comparisons: 53
+Execution Time: 0.0003121
