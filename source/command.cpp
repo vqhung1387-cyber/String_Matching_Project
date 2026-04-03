@@ -28,6 +28,24 @@ void execute_algorithm(string alg, string outputFile, vector<vector<char>> &dict
     }
     else if (alg == "rk")
     {
+        auto start = chrono::high_resolution_clock::now();
+        int n = testCase.size();
+        for (int i = 0; i < n; i++)
+        {
+            vector<MatchResult> res = rabinKarp2D(dict, testCase[i]);
+            writeOuputRes(outputFile, res, testCase[i]);
+        }
+        auto end = chrono::high_resolution_clock::now();
+
+        chrono::duration<double> duration = end - start;
+
+        long long comp = 0;
+        for (int i = 0; i < n; i++)
+        {
+            vector<MatchResult> dummy;
+            comp += rabinKarp2Dcmp(dict, testCase[i], dummy);
+        }
+        writeAlgorithmCompTime(alg, comp, duration, outputFile);
     }
     else if (alg == "kmp")
     {

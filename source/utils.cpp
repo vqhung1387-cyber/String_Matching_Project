@@ -35,7 +35,7 @@ void readInputFile(string filename, vector<vector<char>> &dict, vector<string> &
     fin.close();
 }
 
-void writeAlgorithmCompTime(string name, int cmp, chrono::duration<double> time, string filename)
+void writeAlgorithmCompTime(string name, long long cmp, chrono::duration<double> time, string filename)
 {
     ofstream fout;
     if (cnt == 0)

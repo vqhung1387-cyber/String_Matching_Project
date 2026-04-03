@@ -3,5 +3,5 @@ bug: not found
 
 ------------------------------------------
 Algorithm: BF
-Comparisons: 53
-Execution Time: 0.0003121
+Comparisons: 42
+Execution Time: 0.0003242
