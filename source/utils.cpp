@@ -64,13 +64,15 @@ void writeAlgorithmCompTime(string name, long long cmp, chrono::duration<double>
         fout << "KMP" << endl;
     else if (name == "bm")
         fout << "BM" << endl;
+    else if (name == "za")
+        fout << "ZA" << endl;
     else
     {
         cout << "Cannot find this algorithm." << endl;
         return;
     }
     fout << "Comparisons: " << cmp << endl;
-    fout << "Execution Time: " << time.count() * 1000 << " ms";
+    fout << "Execution Time: " << fixed << setprecision(2) << time.count() * 1000 << " ms";
     fout.close();
 }
 

@@ -35,3 +35,12 @@ vector<MatchResult> BMSearch_2D(const vector<vector<char>> &grid, const string &
 
 long long searchBM_cmp(const vector<char> &text, const string &pattern, bool horizontal, int fixedIdx);
 long long BMSearch_2D_cmp(const vector<vector<char>> &grid, const string &pattern);
+
+// ---------------------------------------------------
+
+// --------------------------------------------------
+// Z-ALGORITHM (BONUS)
+void getZarr(const string &str, vector<int> &Z);
+long long getZarr_cmp(const string &str, vector<int> &Z);
+vector<MatchResult> ZSearch_2D(const vector<vector<char>> &grid, const string &pattern);
+long long ZSearch_2D_cmp(const vector<vector<char>> &grid, const string &pattern);

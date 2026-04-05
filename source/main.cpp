@@ -7,7 +7,6 @@ int main(int argc, char *argv[])
 {
     string alg = "", inputFile = "", outputFile = "";
 
-    // Phân tích tham số dòng lệnh thông minh
     for (int i = 1; i < argc; i++)
     {
         string arg = argv[i];
@@ -19,7 +18,6 @@ int main(int argc, char *argv[])
             outputFile = argv[++i];
     }
 
-    // Kiểm tra xem người dùng có nhập đủ không
     if (alg.empty() || inputFile.empty() || outputFile.empty())
     {
         cout << "Usage: crossword.exe -a [algorithm] -i [input_file] -o [output_file]\n";
