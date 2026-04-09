@@ -357,12 +357,8 @@ bool isValid(int x, int y, int Rows, int Cols)
     return x >= 0 && x < Rows && y >= 0 && y < Cols;
 }
 
-vector<MatchResult> BFSearch_2D(const vector<vector<char>> &grid, const string &pattern)
+vector<MatchResult> BFSearch_2D(const vector<vector<char>>& grid, const string& pattern)
 {
-
-    int dx[8] = {0, 1};
-    int dy[8] = {1, 0};
-
     vector<MatchResult> results;
     int lenPattern = pattern.size();
 
@@ -377,27 +373,49 @@ vector<MatchResult> BFSearch_2D(const vector<vector<char>> &grid, const string &
         for (int j = 0; j < Cols; ++j)
         {
             if (grid[i][j] != pattern[0])
-                continue; // Tim ky tu dau
+                continue;
 
-            for (int d = 0; d < 2; ++d) // Thu 2 huong
+
+            int y = j, k;
+            for (k = 1; k < lenPattern; ++k)
             {
-                int x = i, y = j; // Xuat phat tu ky tu dau duoc tim thay
-                int k;
-                for (k = 1; k < lenPattern; ++k)
-                {
-                    x = x + dx[d];
-                    y = y + dy[d];
+                y = y + 1;
 
-                    if (!isValid(x, y, Rows, Cols))
-                        break;
-                    if (grid[x][y] != pattern[k])
-                        break;
-                }
-                if (k == lenPattern)
-                    results.push_back({i, j, x, y});
+                if (!isValid(i, y, Rows, Cols))
+                    break;
+                if (grid[i][y] != pattern[k])
+                    break;
             }
+            if (k == lenPattern)
+                results.push_back({ i, j, i, y });
+
         }
     }
+
+    for (int i = 0; i < Rows; ++i)
+    {
+        for (int j = 0; j < Cols; ++j)
+        {
+            if (grid[i][j] != pattern[0])
+                continue;
+
+
+            int x = i, k;
+            for (k = 1; k < lenPattern; ++k)
+            {
+                x = x + 1;
+
+                if (!isValid(x, j, Rows, Cols))
+                    break;
+                if (grid[x][j] != pattern[k])
+                    break;
+            }
+            if (k == lenPattern)
+                results.push_back({ i, j, x, j });
+
+        }
+    }
+
     return results;
 }
 
